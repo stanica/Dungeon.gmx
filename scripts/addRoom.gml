@@ -1,0 +1,11 @@
+ds_list_add(rooms, ds_map_create());
+var lastRoom = ds_list_find_value(rooms,ds_list_size(rooms)-1);
+ds_map_add(lastRoom, "x1", argument0 - 1);
+ds_map_add(lastRoom, "y1", argument1 - 1);
+ds_map_add(lastRoom, "x2", argument0 + argument2 + 1);
+ds_map_add(lastRoom, "y2", argument1 + argument3 + 1);
+ds_map_add(lastRoom, "w", argument2);
+ds_map_add(lastRoom, "h", argument3);
+ds_map_add(lastRoom, "d", argument4);
+ds_map_add(lastRoom, "c", argument5);
+totalRooms++;
