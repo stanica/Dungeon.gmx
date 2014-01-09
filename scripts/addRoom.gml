@@ -7,8 +7,12 @@ ds_map_add(lastRoom, "x2", argument0 + argument2 + 1);
 ds_map_add(lastRoom, "y2", argument1 + argument3 + 1);
 ds_map_add(lastRoom, "width", argument2);
 ds_map_add(lastRoom, "height", argument3);
-ds_map_add(lastRoom, "door", argument4);
-ds_map_add(lastRoom, "c", argument5);
+ds_map_add(lastRoom, "freeConnections", argument4);
+
+for (var i = 0; i < 4; i++) {
+    connections[i] = 0;
+}
+ds_map_add(lastRoom, "connections", connections);
 
 //Add room shape to grid
 for (var k = 0; k < argument3; k++) {

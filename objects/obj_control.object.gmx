@@ -28,7 +28,7 @@
             <string>//Initial setup
 randomize();
 var sprite_size = 32;
-var totalRoomNumber = 3;
+var totalRoomNumber = 13;
 var numberOfRooms = 0;
 globalvar totalRooms;
 totalRooms = 0;
@@ -43,47 +43,103 @@ var maxRoomSize = 7;
 
 var roomCheck = 0;
 var collide = false;
-var currRoom, x1, x2, y1, y2, spacing, numCollisions = 0, door;
+var currRoom, x1, x2, y1, y2, spacing, numCollisions = 0, freeConnections, maxConnections, door, connectionAttempt=0, connections;
 
-//Brute force initial room
+//Initial room at center of map with 3 potential connections
 roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 var j = width / 2 - roomW / 2;
 var i = height / 2 - roomH / 2;
-door = choose (1, 2, 3, 4);
-addRoom(j, i, roomW, roomH, door, 0);
+addRoom(j, i, roomW, roomH, 3); 
+
+roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
+roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
+
+// currRoom = ds_list_find_value(rooms, 0)
+// var array2 = ds_map_find_value(currRoom,"connections")
 
 while(ds_list_size(rooms) &lt; totalRoomNumber) { 
-    while (roomCheck &lt; ds_list_size(rooms)) {
+        roomCheck = irandom(ds_list_size(rooms)-1);
         currRoom = ds_list_find_value(rooms, roomCheck)
-        x1 = ds_map_find_value(currRoom, "x1");
-        y1 = ds_map_find_value(currRoom, "y1");
-        x2 = ds_map_find_value(currRoom, "x2");
-        y2 = ds_map_find_value(currRoom, "y2");
-        spacing = 1;
-        if (!(x2+spacing &gt;= j &amp;&amp; x1-spacing &lt;= (j + roomW-1) &amp;&amp; y2+spacing &gt;= i &amp;&amp; y1-spacing &lt;= (i + roomH-1))) {
-            roomCheck++
+        freeConnections = ds_map_find_value(currRoom, "freeConnections");
+        connections = ds_map_find_value(currRoom,"connections");
+        if (freeConnections == 0) {
+            roomCheck = irandom(ds_list_size(rooms)-1);
         }
         else {
-            collide = true;
-            roomCheck = ds_list_size(rooms);
+            x1 = ds_map_find_value(currRoom, "x1");
+            y1 = ds_map_find_value(currRoom, "y1");
+            x2 = ds_map_find_value(currRoom, "x2");
+            y2 = ds_map_find_value(currRoom, "y2");
+            tempH = ds_map_find_value(currRoom, "height");
+            tempW = ds_map_find_value(currRoom, "width");
+            connectionAttempt = 0;
+            
+            while(connectionAttempt &lt; freeConnections) {
+                door = choose(0, 1, 2, 3);
+                var corridorLength = 3;
+                if (door == 0 &amp;&amp; connections[door] == 0) {
+                    if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - corridorLength, roomW, roomH)) {
+                        addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - 1, roomW, roomH, 2);
+                        for (var k = 0; k &lt; corridorLength+1; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, x1 + ((x2 - x1) / 2), y1-k+1), "blockType", 2);       
+                        }
+                        connections[door] = 1;   
+                        connectionAttempt = freeConnections;
+                    }
+                    else 
+                        connectionAttempt++;
+                }
+                else if (door == 1 &amp;&amp; connections[door] == 0) {
+                    if (!checkCollision(x1 + tempW + corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
+                        addRoom(x1 + tempW + corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH, 2);
+                        for (var k = 0; k &lt; corridorLength; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, x1 + tempW + k, y1 + (y2 - y1) / 2), "blockType", 2);       
+                        }
+                        connections[door] = 1;   
+                        connectionAttempt = freeConnections;
+                    }
+                    else 
+                        connectionAttempt++;
+                }
+                else if (door == 2 &amp;&amp; connections[door] == 0) {
+                    if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH)) {
+                        addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH, 2);
+                        for (var k = 0; k &lt; corridorLength+1; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, x1 + ((x2 - x1) / 2), y1 + (y2 - y1)-2 + k)-1, "blockType", 2);       
+                        }
+                        connections[door] = 1;   
+                        connectionAttempt = freeConnections;
+                    }
+                    else 
+                        connectionAttempt++;
+                }
+                else if (door == 3 &amp;&amp; connections[door] == 0) {
+                    if (!checkCollision(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
+                        addRoom(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH, 2);
+                        for (var k = 0; k &lt; corridorLength+2; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, x1 - k+1, y1 + (y2 - y1) / 2), "blockType", 2);       
+                        }
+                        connections[door] = 1;   
+                        connectionAttempt = freeConnections;
+                    }
+                    else 
+                        connectionAttempt++;
+                }
+                /*spacing = 1;
+                if (!(x2+spacing &gt;= j &amp;&amp; x1-spacing &lt;= (j + roomW-1) &amp;&amp; y2+spacing &gt;= i &amp;&amp; y1-spacing &lt;= (i + roomH-1))) {
+                    roomCheck++
+                }
+                else {
+                    collide = true;
+                    roomCheck = ds_list_size(rooms);
+                }*/
+            }
         }
-    }
-    roomCheck = 0; 
-    if (collide){
-        if (numCollisions &gt; 20)
-            break;
-        numCollisions ++;
-        collide = false;
-    }
-    else {
-        door = choose (1, 2, 3, 4);
-        addRoom(j, i, roomW, roomH, door, ds_list_find_value(rooms, numberOfRooms-1));
-    }
+    
+    
     roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
     roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
-    j = irandom(width - roomW - 1) + 1;
-    i = irandom(height - roomH - 1) + 1;
 }
 
 draw(width, height);

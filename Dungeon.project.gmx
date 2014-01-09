@@ -14,6 +14,7 @@
     <script>scripts\init.gml</script>
     <script>scripts\draw.gml</script>
     <script>scripts\addRoom.gml</script>
+    <script>scripts\checkCollision.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_wall</object>
