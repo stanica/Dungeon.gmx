@@ -28,7 +28,7 @@
             <string>//Initial setup
 randomize();
 var sprite_size = 32;
-var totalRoomNumber = 13;
+var totalRoomNumber = 20;
 var numberOfRooms = 0;
 globalvar totalRooms;
 totalRooms = 0;
@@ -78,7 +78,7 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
             while(connectionAttempt &lt; freeConnections) {
                 door = choose(0, 1, 2, 3);
                 var corridorLength = 3;
-                if (door == 0 &amp;&amp; connections[door] == 0) {
+                if (door == 0 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 - roomH - corridorLength) &gt; 0) {
                     if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - corridorLength, roomW, roomH)) {
                         addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - 1, roomW, roomH, 2);
                         for (var k = 0; k &lt; corridorLength+1; k++) {
@@ -86,11 +86,13 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
+                        freeConnections--;
+                        ds_map_replace(currRoom, "freeConnections", freeConnections);
                     }
                     else 
                         connectionAttempt++;
                 }
-                else if (door == 1 &amp;&amp; connections[door] == 0) {
+                else if (door == 1 &amp;&amp; connections[door] == 0 &amp;&amp; (x1 + tempW + corridorLength + roomW) &lt; room_width-1) {
                     if (!checkCollision(x1 + tempW + corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
                         addRoom(x1 + tempW + corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH, 2);
                         for (var k = 0; k &lt; corridorLength; k++) {
@@ -98,11 +100,13 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
+                        freeConnections--;
+                        ds_map_replace(currRoom, "freeConnections", freeConnections);
                     }
                     else 
                         connectionAttempt++;
                 }
-                else if (door == 2 &amp;&amp; connections[door] == 0) {
+                else if (door == 2 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 + tempH + corridorLength + roomH) &lt; room_height) {
                     if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH)) {
                         addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH, 2);
                         for (var k = 0; k &lt; corridorLength+1; k++) {
@@ -110,11 +114,13 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
+                        freeConnections--;
+                        ds_map_replace(currRoom, "freeConnections", freeConnections);
                     }
                     else 
                         connectionAttempt++;
                 }
-                else if (door == 3 &amp;&amp; connections[door] == 0) {
+                else if (door == 3 &amp;&amp; connections[door] == 0 &amp;&amp; (x1 - roomW - corridorLength) &gt; 0) {
                     if (!checkCollision(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
                         addRoom(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH, 2);
                         for (var k = 0; k &lt; corridorLength+2; k++) {
@@ -122,6 +128,8 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
+                        freeConnections--;
+                        ds_map_replace(currRoom, "freeConnections", freeConnections);
                     }
                     else 
                         connectionAttempt++;
