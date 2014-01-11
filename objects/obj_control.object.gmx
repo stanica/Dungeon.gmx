@@ -28,13 +28,13 @@
             <string>//Initial setup
 randomize();
 var sprite_size = 32;
-var totalRoomNumber = 20;
+var totalRoomNumber = 2;
 var numberOfRooms = 0;
 globalvar totalRooms;
 totalRooms = 0;
 
-var height = room_height / sprite_size;
-var width = room_width / sprite_size;
+ height = room_height / sprite_size;
+ width = room_width / sprite_size;
 
 init(width, height);
 
@@ -50,6 +50,7 @@ roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 var j = width / 2 - roomW / 2;
 var i = height / 2 - roomH / 2;
+show_message(string(j) + ", " + string(i));
 addRoom(j, i, roomW, roomH, 3); 
 
 roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
@@ -77,7 +78,7 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
             
             while(connectionAttempt &lt; freeConnections) {
                 door = choose(0, 1, 2, 3);
-                var corridorLength = 3;
+                var corridorLength = 2;
                 if (door == 0 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 - roomH - corridorLength) &gt; 0) {
                     if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - corridorLength, roomW, roomH)) {
                         addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - 1, roomW, roomH, 2);
@@ -109,6 +110,7 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                 else if (door == 2 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 + tempH + corridorLength + roomH) &lt; room_height) {
                     if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH)) {
                         addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH, 2);
+                        //show_message("[" +string(x1)+ "," +string(y1) + "] " + string(tempH) + " + " + string(corridorLength));
                         for (var k = 0; k &lt; corridorLength+1; k++) {
                             ds_map_replace(ds_grid_get(dungeon, x1 + ((x2 - x1) / 2), y1 + (y2 - y1)-2 + k)-1, "blockType", 2);       
                         }
@@ -122,8 +124,9 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                 }
                 else if (door == 3 &amp;&amp; connections[door] == 0 &amp;&amp; (x1 - roomW - corridorLength) &gt; 0) {
                     if (!checkCollision(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
-                        addRoom(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH, 2);
-                        for (var k = 0; k &lt; corridorLength+2; k++) {
+                        addRoom(floor(x1 - roomW - corridorLength),floor(y1 + ((y2 - y1) / 2) - (roomH / 2)), roomW, roomH, 2);
+                        //show_message(string(floor(x1 - roomW - corridorLength)) + " " + string(floor(y1 + ((y2 - y1) / 2) - (roomH / 2))) + " w:" + string(roomW) + " x1:" + string(x1));
+                        for (var k = 0; k &lt; corridorLength+1; k++) {
                             ds_map_replace(ds_grid_get(dungeon, x1 - k+1, y1 + (y2 - y1) / 2), "blockType", 2);       
                         }
                         connections[door] = 1;   
@@ -244,6 +247,36 @@ draw(width, height);
           <argument>
             <kind>1</kind>
             <string>view_xview -= 10;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for (var i = 0; i &lt; height; i++) {
+    for (var j = 0; j &lt; width; j++) {
+    draw_set_color(c_white);
+    
+    draw_text(j*32, i*32, string(j));
+    draw_text(j*32, i*32+13, string(i));
+    }
+}
 </string>
           </argument>
         </arguments>
