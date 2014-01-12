@@ -28,36 +28,32 @@
             <string>//Initial setup
 randomize();
 var sprite_size = 32;
-var totalRoomNumber = 2;
+var totalRoomNumber = 20;
 var numberOfRooms = 0;
 globalvar totalRooms;
 totalRooms = 0;
 
- height = room_height / sprite_size;
- width = room_width / sprite_size;
+var height = ceil(room_height / sprite_size);
+var width = ceil(room_width / sprite_size);
 
 init(width, height);
 
-var minRoomSize = 5;
-var maxRoomSize = 7;
+var minRoomSize = 7;
+var maxRoomSize = 9;
 
 var roomCheck = 0;
 var collide = false;
-var currRoom, x1, x2, y1, y2, spacing, numCollisions = 0, freeConnections, maxConnections, door, connectionAttempt=0, connections;
+var currRoom, x1, x2, y1, y2, spacing, numCollisions = 0, freeConnections, 
+    maxConnections, door, connectionAttempt=0, connections;
 
 //Initial room at center of map with 3 potential connections
 roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
-var j = width / 2 - roomW / 2;
-var i = height / 2 - roomH / 2;
-show_message(string(j) + ", " + string(i));
+var j = floor(width / 2 - roomW / 2);
+var i = floor(height / 2 - roomH / 2);
 addRoom(j, i, roomW, roomH, 3); 
-
 roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
-
-// currRoom = ds_list_find_value(rooms, 0)
-// var array2 = ds_map_find_value(currRoom,"connections")
 
 while(ds_list_size(rooms) &lt; totalRoomNumber) { 
         roomCheck = irandom(ds_list_size(rooms)-1);
@@ -78,12 +74,15 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
             
             while(connectionAttempt &lt; freeConnections) {
                 door = choose(0, 1, 2, 3);
+                maxConnections = 4;
                 var corridorLength = 2;
                 if (door == 0 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 - roomH - corridorLength) &gt; 0) {
-                    if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - corridorLength, roomW, roomH)) {
-                        addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 - roomH - 1, roomW, roomH, 2);
-                        for (var k = 0; k &lt; corridorLength+1; k++) {
-                            ds_map_replace(ds_grid_get(dungeon, x1 + ((x2 - x1) / 2), y1-k+1), "blockType", 2);       
+                    if (!checkCollision(floor(x1 + (tempW / 2) - (roomW / 2)),floor(y1 - roomH - corridorLength), roomW, roomH)) {
+                        addRoom(floor(x1 + (tempW / 2) - (roomW / 2)),floor(y1 - roomH - corridorLength), roomW, roomH, maxConnections);
+                        for (var k = 0; k &lt; corridorLength+2; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, floor(x1 + (tempW / 2)), y1-k), "blockType", 2);
+                             ds_map_replace(ds_grid_get(dungeon, floor(x1 + (tempW / 2))-1, y1-k), "blockType", 1);
+                             ds_map_replace(ds_grid_get(dungeon, floor(x1 + (tempW / 2))+1, y1-k), "blockType", 1);
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
@@ -93,11 +92,13 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                     else 
                         connectionAttempt++;
                 }
-                else if (door == 1 &amp;&amp; connections[door] == 0 &amp;&amp; (x1 + tempW + corridorLength + roomW) &lt; room_width-1) {
-                    if (!checkCollision(x1 + tempW + corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
-                        addRoom(x1 + tempW + corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH, 2);
-                        for (var k = 0; k &lt; corridorLength; k++) {
-                            ds_map_replace(ds_grid_get(dungeon, x1 + tempW + k, y1 + (y2 - y1) / 2), "blockType", 2);       
+                else if (door == 1 &amp;&amp; connections[door] == 0 &amp;&amp; (x1 + tempW + corridorLength + roomW) &lt; width) {
+                    if (!checkCollision(floor(x1 + tempW + corridorLength),floor(y1 + (tempH / 2) - (roomH / 2)), roomW, roomH)) {
+                        addRoom(floor(x1 + tempW + corridorLength),floor(y1 + (tempH / 2) - (roomH / 2)), roomW, roomH, maxConnections);
+                        for (var k = -1; k &lt; corridorLength+1; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, x1 + tempW + k, floor(y1 + tempH / 2)), "blockType", 2);
+                            ds_map_replace(ds_grid_get(dungeon, x1 + tempW + k, floor(y1 + tempH / 2)-1), "blockType", 1);
+                            ds_map_replace(ds_grid_get(dungeon, x1 + tempW + k, floor(y1 + tempH / 2)+1), "blockType", 1);
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
@@ -107,12 +108,13 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                     else 
                         connectionAttempt++;
                 }
-                else if (door == 2 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 + tempH + corridorLength + roomH) &lt; room_height) {
-                    if (!checkCollision(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH)) {
-                        addRoom(x1 + ((x2 - x1) / 2) - (roomW / 2),y1 + tempH + corridorLength, roomW, roomH, 2);
-                        //show_message("[" +string(x1)+ "," +string(y1) + "] " + string(tempH) + " + " + string(corridorLength));
-                        for (var k = 0; k &lt; corridorLength+1; k++) {
-                            ds_map_replace(ds_grid_get(dungeon, x1 + ((x2 - x1) / 2), y1 + (y2 - y1)-2 + k)-1, "blockType", 2);       
+                else if (door == 2 &amp;&amp; connections[door] == 0 &amp;&amp; (y1 + tempH + corridorLength + roomH) &lt; height) {
+                    if (!checkCollision(floor(x1 + (tempW / 2) - (roomW / 2)),floor(y1 + tempH + corridorLength), roomW, roomH)) {
+                        addRoom(floor(x1 + (tempW / 2) - (roomW / 2)),floor(y1 + tempH + corridorLength), roomW, roomH, maxConnections);
+                        for (var k = -1; k &lt; corridorLength+1; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, floor(x1 + (tempW / 2)), y1 + tempH + k), "blockType", 2);
+                            ds_map_replace(ds_grid_get(dungeon, floor(x1 + (tempW / 2))-1, y1 + tempH + k), "blockType", 1);
+                            ds_map_replace(ds_grid_get(dungeon, floor(x1 + (tempW / 2))+1, y1 + tempH + k), "blockType", 1);
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
@@ -123,11 +125,12 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                         connectionAttempt++;
                 }
                 else if (door == 3 &amp;&amp; connections[door] == 0 &amp;&amp; (x1 - roomW - corridorLength) &gt; 0) {
-                    if (!checkCollision(x1 - roomW - corridorLength,y1 + ((y2 - y1) / 2) - (roomH / 2), roomW, roomH)) {
-                        addRoom(floor(x1 - roomW - corridorLength),floor(y1 + ((y2 - y1) / 2) - (roomH / 2)), roomW, roomH, 2);
-                        //show_message(string(floor(x1 - roomW - corridorLength)) + " " + string(floor(y1 + ((y2 - y1) / 2) - (roomH / 2))) + " w:" + string(roomW) + " x1:" + string(x1));
-                        for (var k = 0; k &lt; corridorLength+1; k++) {
-                            ds_map_replace(ds_grid_get(dungeon, x1 - k+1, y1 + (y2 - y1) / 2), "blockType", 2);       
+                    if (!checkCollision(floor(x1 - roomW - corridorLength),floor(y1 + (tempH / 2) - (roomH / 2)), roomW, roomH)) {
+                        addRoom(floor(x1 - roomW - corridorLength),floor(y1 + (tempH / 2) - (roomH / 2)), roomW, roomH, maxConnections);
+                        for (var k = 0; k &lt; corridorLength+2; k++) {
+                            ds_map_replace(ds_grid_get(dungeon, x1 - k, floor(y1 + tempH / 2)), "blockType", 2);
+                            ds_map_replace(ds_grid_get(dungeon, x1 - k, floor(y1 + tempH / 2)-1), "blockType", 1);
+                            ds_map_replace(ds_grid_get(dungeon, x1 - k, floor(y1 + tempH / 2)+1), "blockType", 1);
                         }
                         connections[door] = 1;   
                         connectionAttempt = freeConnections;
@@ -177,7 +180,7 @@ draw(width, height);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_yview += 10;
+            <string>//view_yview += 10;
 </string>
           </argument>
         </arguments>
@@ -200,7 +203,7 @@ draw(width, height);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview += 10;
+            <string>//view_xview += 10;
 </string>
           </argument>
         </arguments>
@@ -223,7 +226,7 @@ draw(width, height);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_yview -= 10;
+            <string>//view_yview -= 10;
 </string>
           </argument>
         </arguments>
@@ -246,37 +249,7 @@ draw(width, height);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview -= 10;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>for (var i = 0; i &lt; height; i++) {
-    for (var j = 0; j &lt; width; j++) {
-    draw_set_color(c_white);
-    
-    draw_text(j*32, i*32, string(j));
-    draw_text(j*32, i*32+13, string(i));
-    }
-}
+            <string>//view_xview -= 10;
 </string>
           </argument>
         </arguments>
