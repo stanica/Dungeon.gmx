@@ -33,8 +33,8 @@ var numberOfRooms = 0;
 globalvar totalRooms;
 totalRooms = 0;
 
-var height = ceil(room_height / sprite_size);
-var width = ceil(room_width / sprite_size);
+height = ceil(room_height / sprite_size);
+width = ceil(room_width / sprite_size);
 
 init(width, height);
 
@@ -140,22 +140,11 @@ while(ds_list_size(rooms) &lt; totalRoomNumber) {
                     else 
                         connectionAttempt++;
                 }
-                /*spacing = 1;
-                if (!(x2+spacing &gt;= j &amp;&amp; x1-spacing &lt;= (j + roomW-1) &amp;&amp; y2+spacing &gt;= i &amp;&amp; y1-spacing &lt;= (i + roomH-1))) {
-                    roomCheck++
-                }
-                else {
-                    collide = true;
-                    roomCheck = ds_list_size(rooms);
-                }*/
             }
-        }
-    
-    
+        } 
     roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
     roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 }
-
 draw(width, height);
 
 </string>

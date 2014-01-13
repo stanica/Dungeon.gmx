@@ -24,5 +24,6 @@ for (var i = 0; i < argument1; i++) {
         else if (blockType == 5)
             obj = obj_other3;      
         ds_grid_set(dungeonIds, j, i, instance_create(j * 32, i * 32, obj));
+        //instance_deactivate_object(ds_grid_get(dungeonIds, j, i));
     }
 }

@@ -5,7 +5,7 @@ rooms = ds_list_create();
 for (var i = 0; i < argument1; i++) {
     for (var j = 0; j < argument0; j++) {
         ds_grid_set(dungeon, j, i, ds_map_create());
-        ds_map_add(ds_grid_get(dungeon, j, i), "blockType", 0);
+        //ds_map_add(ds_grid_get(dungeon, j, i), "blockType", 0);
     }
 }
 

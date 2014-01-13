@@ -18,11 +18,14 @@
     <script>scripts\checkCollision.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_wall</object>
-    <object>objects\obj_black</object>
     <object>objects\obj_control</object>
-    <object>objects\obj_inner</object>
+    <object>objects\obj_entity</object>
     <object>objects\obj_player</object>
+    <objects name="Static objects">
+      <object>objects\obj_black</object>
+      <object>objects\obj_wall</object>
+      <object>objects\obj_inner</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
