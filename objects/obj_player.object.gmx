@@ -40,6 +40,9 @@ if (keyboard_check(ord("S")) &amp;&amp; !position_meeting(x, y+32, obj_wall)) {
 if (keyboard_check_pressed(vk_tab)) {
    show_message(view_hport[0]);
 }
+if (keyboard_check(ord("R"))) {
+   game_restart();
+}
 
 view_xview[0] = x - (view_wview[0] / 2);
 view_yview[0] = y - (view_hview[0] / 2);

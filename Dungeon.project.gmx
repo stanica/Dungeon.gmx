@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_block</sprite>
     <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_smallRat</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -16,6 +17,7 @@
     <script>scripts\draw.gml</script>
     <script>scripts\addRoom.gml</script>
     <script>scripts\checkCollision.gml</script>
+    <script>scripts\addEnemies.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
@@ -26,6 +28,7 @@
       <object>objects\obj_wall</object>
       <object>objects\obj_inner</object>
     </objects>
+    <object>objects\obj_smallRat</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
