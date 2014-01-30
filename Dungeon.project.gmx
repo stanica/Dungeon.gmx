@@ -19,6 +19,7 @@
     <script>scripts\checkCollision.gml</script>
     <script>scripts\addEnemies.gml</script>
     <script>scripts\initEnemies.gml</script>
+    <script>scripts\map1.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
