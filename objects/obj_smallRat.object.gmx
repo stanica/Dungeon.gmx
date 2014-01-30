@@ -5,9 +5,41 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_entity</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var obj = instance_nearest(x, y, obj_player);
+var distance = 192;
+
+if (distance_to_object(obj_player) &lt; distance &amp;&amp; !collision_line(x, y, obj.x, obj.y, obj_wall, 0, 1)) {
+    path = path_add();
+    mp_potential_path(path, obj_player.x, obj_player.y, 3, 4, 0);
+    path_start(path, 3, 0, 0);
+}
+//distance_to_object(obj) &lt; distance &amp;&amp; !collision_line(x+16, y+16, obj.x, obj.y, obj_wall, 1, 1)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

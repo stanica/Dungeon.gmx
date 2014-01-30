@@ -27,16 +27,22 @@
             <kind>1</kind>
             <string>//Initial setup
 randomize();
-var sprite_size = 32;
+globalvar spriteSize;
+spriteSize = 32;
 var totalRoomNumber = 20;
 var numberOfRooms = 0;
 globalvar totalRooms;
 totalRooms = 0;
 
-var height = ceil(room_height / sprite_size);
-var width = ceil(room_width / sprite_size);
+//Max number of any given enemy
+globalvar maxEnemyNumber;
+maxEnemyNumber = 10;
+
+var height = ceil(room_height / spriteSize);
+var width = ceil(room_width / spriteSize);
 
 init(width, height);
+initEnemies();
 
 var minRoomSize = 7;
 var maxRoomSize = 9;

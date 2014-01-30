@@ -4,6 +4,8 @@ dungeonBlocks = ds_grid_create(argument0, argument1);
 //Stores the objects of the blockType instances. 
 dungeonBlocksIds = ds_grid_create(argument0, argument1);
 
+initEnemies();
+
 //Stores a list of rooms. A room is a ds_map with various properties.
 rooms = ds_list_create();
 
@@ -14,4 +16,7 @@ for (var i = 0; i < argument1; i++) {
     }
 }
 
-instance_create(room_width / 2, room_height / 2, obj_player);
+var yPos = ceil((ceil(room_height / spriteSize)) / 2);
+var xPos = ceil((ceil(room_width / spriteSize)) / 2);
+
+instance_create(xPos*32, yPos*32, obj_player);
