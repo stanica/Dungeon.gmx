@@ -20,6 +20,9 @@
     <script>scripts\addEnemies.gml</script>
     <script>scripts\initEnemies.gml</script>
     <script>scripts\map1.gml</script>
+    <script>scripts\doCombat.gml</script>
+    <script>scripts\meleeDamage.gml</script>
+    <script>scripts\checkHealth.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
@@ -31,6 +34,7 @@
       <object>objects\obj_inner</object>
     </objects>
     <object>objects\obj_smallRat</object>
+    <object>objects\obj_enemy</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

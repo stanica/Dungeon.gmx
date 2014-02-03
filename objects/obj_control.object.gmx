@@ -37,14 +37,15 @@ totalRooms = 0;
 globalvar maxEnemyNumber;
 maxEnemyNumber = 10;
 
-var height = ceil(room_height / spriteSize);
-var width = ceil(room_width / spriteSize);
+var height = ceil((room_height) / spriteSize);
+var width = ceil((room_width) / spriteSize);
 
 init(width, height);
 
 map1(width, height);
 
 draw(width, height);
+
 
 </string>
           </argument>

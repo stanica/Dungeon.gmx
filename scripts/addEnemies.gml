@@ -1,5 +1,5 @@
 if (argument0 == 1) {
-   var numEnemies = irandom(maxEnemyNumber - 8) + 8;show_message(numEnemies);
+   var numEnemies = irandom(maxEnemyNumber - 8) + 8;
    var currentEnemy = 0;
    var generatedEnemies = 0;
    var exists = false;
@@ -23,10 +23,8 @@ if (argument0 == 1) {
         currentEnemy = 0;
         generatedEnemies++;
         var rat = instance_create((roomX + paddingX)* 32, (roomY + paddingY) * 32, obj_smallRat);
-        show_message(ds_grid_get(enemies,1,0)+2);
-        ds_grid_set(enemies, ds_grid_get(enemies,1,0)+2, 1, rat);
+        ds_grid_set(enemies, ds_grid_get(enemies,1,0)+2, 0, rat);
         ds_grid_set(enemies, 1, 0, ds_grid_get(enemies,1,0)+1);
     }
 }
-show_message(ds_grid_get(enemies,1,0));
 
