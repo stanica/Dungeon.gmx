@@ -35,6 +35,7 @@
     </objects>
     <object>objects\obj_smallRat</object>
     <object>objects\obj_enemy</object>
+    <object>objects\obj_ui</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

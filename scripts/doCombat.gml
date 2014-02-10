@@ -15,4 +15,3 @@ with(enemy) {
         checkHealth(enemy, argument1);
     }
 }
-show_message(health);

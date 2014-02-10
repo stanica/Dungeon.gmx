@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>health = irandom(8) + 40;
+            <string>maxHealth = irandom(8) + 40;
+health = irandom(8) + 40;
 strength = irandom(3) + 8;
 intelligence = irandom(3) + 8;
 dexterity = irandom(3) + 8;
@@ -33,6 +34,10 @@ defense = irandom(3) + 8
 armor = 0;
 attackDamage = 7
 experience = 0;
+//1 = right, 0 = left
+facing = 1
+image_index = 0;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -57,11 +62,13 @@ experience = 0;
             <kind>1</kind>
             <string>var playerSpeed = 32;
 
-if (keyboard_check(ord("D")) &amp;&amp; !place_meeting(x+playerSpeed, y, obj_wall)) {
+if (keyboard_check(ord("D")) &amp;&amp; !place_meeting(x+playerSpeed, y, obj_wall) ) {
     x += playerSpeed;
+    image_index = 0;
 }
 if (keyboard_check(ord("A")) &amp;&amp; !place_meeting(x-playerSpeed, y, obj_wall)) {
     x -= playerSpeed;
+    image_index = 1;
 }
 if (keyboard_check(ord("W")) &amp;&amp; !place_meeting(x, y-playerSpeed, obj_wall)) {
     y -= playerSpeed;

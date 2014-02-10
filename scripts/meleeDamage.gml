@@ -5,4 +5,4 @@ var evasionRate = irandom_range(1,100 / ceil(argument4 / 3));
 if (evasionRate == 1)
     return 0;
 else
-    return damage;
+    return floor(damage);
