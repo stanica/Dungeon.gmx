@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>maxHealth = irandom(8) + 40;
-health = irandom(8) + 40;
+health = maxHealth;
 strength = irandom(3) + 8;
 intelligence = irandom(3) + 8;
 dexterity = irandom(3) + 8;
@@ -110,7 +110,7 @@ var y1 = floor(y/32);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>doCombat(other.id, 1);  
+            <string>doCombat(other.id, other.enemyType);
 </string>
           </argument>
         </arguments>

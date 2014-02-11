@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>eHealth = irandom (6) + 30;
+            <string>maxHealth = irandom (6) + 30;
+eHealth = maxHealth;
 strength = irandom(2) + 2;
 intelligence = irandom(2) + 2;
 dexterity = irandom(2) + 2;
@@ -64,6 +65,36 @@ if (distance_to_object(obj_player) &lt; distance &amp;&amp; !collision_line(x, y
     path_start(path, 3, 0, 0);
 }
 //distance_to_object(obj) &lt; distance &amp;&amp; !collision_line(x+16, y+16, obj.x, obj.y, obj_wall, 1, 1)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+draw_set_color(c_green);
+var bar = eHealth / maxHealth * 25;
+if (bar/25 &lt; 0.5)
+   draw_set_color(c_red);
+else if (bar/25 &lt; 0.8)
+     draw_set_color(c_orange);
+draw_rectangle(x-15,y-10,x+bar-15,y-5,false);
 </string>
           </argument>
         </arguments>
