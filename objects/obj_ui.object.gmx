@@ -8,6 +8,31 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Stores combat text
+globalvar combatStrings;
+combatStrings = ds_stack_create();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -42,6 +67,12 @@ else if (health / obj_player.maxHealth &gt; 0.5)
 else
     draw_set_color(c_red);
 draw_text(985, 20, health);
+
+if (ds_stack_size(combatStrings) &gt; 0) {
+   show_message(ds_stack_size(combatStrings));
+   text = ds_stack_pop(combatStrings);
+   draw_text(20, 550, text);
+}
 </string>
           </argument>
         </arguments>
