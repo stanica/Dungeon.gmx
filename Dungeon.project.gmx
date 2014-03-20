@@ -9,6 +9,7 @@
     <sprite>sprites\spr_block</sprite>
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_smallRat</sprite>
+    <sprite>sprites\spr_scroll_button</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -36,6 +37,8 @@
     <object>objects\obj_smallRat</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_ui</object>
+    <object>objects\obj_up_button</object>
+    <object>objects\obj_down_button</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
