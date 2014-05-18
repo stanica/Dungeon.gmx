@@ -12,8 +12,12 @@ Working
 * Collision detection
 * Basic melee combat
 * Awful UI
+* Scrolling combat log
 
 In-progress
 -----------
-* Combat log
 * Better UI
+* More monsters
+* Ranged combat
+* Hero levels
+* Pick ups (potions, weapons, armor)
