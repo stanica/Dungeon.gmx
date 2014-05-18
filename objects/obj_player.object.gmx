@@ -32,6 +32,7 @@ intelligence = irandom(3) + 8;
 dexterity = irandom(3) + 8;
 defense = irandom(3) + 8
 armor = 0;
+gold = 0;
 attackDamage = 7
 experience = 0;
 //1 = right, 0 = left

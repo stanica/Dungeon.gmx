@@ -27,7 +27,12 @@
             <kind>1</kind>
             <string>//Stores combat text
 globalvar combatStrings;
+globalvar logIndex;
+logIndex = 0;
+globalvar logSize;
+logSize = 0;
 combatStrings = ds_list_create();
+
 </string>
           </argument>
         </arguments>
@@ -54,28 +59,51 @@ combatStrings = ds_list_create();
 draw_set_color(c_blue);
 
 //Right panel
-draw_rectangle(896,0,1088,512,false);
+//draw_rectangle(896,0,1088,512,false);
 //Bototm panel
-draw_rectangle(0,512,1088,608,false);
-
-instance_create(100,430,obj_up_button);
+//draw_rectangle(0,512,1088,608,false);
 
 draw_set_color(c_black);
-draw_text(896+padding, 20, "Health: ");
+draw_text(view_xport[1]+padding, view_yport[1]+padding, "Health: ");
 if (health / obj_player.maxHealth &gt; 0.8)
     draw_set_color(c_green);
 else if (health / obj_player.maxHealth &gt; 0.5)
     draw_set_color(c_orange);
 else
     draw_set_color(c_red);
-draw_text(985, 20, health);
+draw_text(view_xport[1]+89, view_yport[1]+padding, health);
+
+draw_set_color(c_black);
+draw_text(view_xport[1]+padding, view_yport[1]+padding*2, "EXP: ");
+draw_text(view_xport[1]+63, view_yport[1]+padding*2, obj_player.experience);
+
+draw_text(view_xport[1]+padding, view_yport[1]+padding*3.5, "STR: ");
+draw_text(view_xport[1]+63, view_yport[1]+padding*3.5, obj_player.strength);
+draw_text(view_xport[1]+padding, view_yport[1]+padding*4.5, "INT: ");
+draw_text(view_xport[1]+63, view_yport[1]+padding*4.5, obj_player.intelligence);
+draw_text(view_xport[1]+padding, view_yport[1]+padding*5.5, "DEX: ");
+draw_text(view_xport[1]+63, view_yport[1]+padding*5.5, obj_player.dexterity);
+
+draw_text(view_xport[1]+padding, view_yport[1]+padding*7, "ARMOR: ");
+draw_text(view_xport[1]+83, view_yport[1]+padding*7, obj_player.armor);
+
+draw_text(view_xport[1]+padding, view_yport[1]+padding*8.5, "ATK: ");
+draw_text(view_xport[1]+63, view_yport[1]+padding*8.5, obj_player.attackDamage);
+
+draw_text(view_xport[1]+padding, view_yport[1]+padding*9.5, "GOLD: ");
+draw_text(view_xport[1]+73, view_yport[1]+padding*9.5, obj_player.gold);
 
 logSize = ds_list_size(combatStrings);
-index = 0
+
 if (logSize &gt; 0) {
-   for (x = index; x &lt; index + 5; x++) {
-       draw_text(5, 515+x*18, ds_list_find_value(combatStrings, x));
+   draw_set_color(c_black);
+   for (x = logIndex; x &lt; logIndex + 5; x++) {
+       draw_text(5, 515+(x-logIndex)*18, ds_list_find_value(combatStrings, x));
    }
+}
+if (logSize &gt; 5 &amp;&amp; !instance_exists(obj_up_button) &amp;&amp; !instance_exists(obj_down_button)) {
+   instance_create(view_xview[2]+400,view_yview[2]+10, obj_up_button);
+   instance_create(view_xview[2]+400,view_yview[2]+85, obj_down_button);
 }
 </string>
           </argument>

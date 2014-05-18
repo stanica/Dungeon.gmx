@@ -1,8 +1,15 @@
 if (argument0.eHealth < 0) {
    if (argument1 == 1)
       obj_player.experience += 45;
+      gold = irandom(4)+1;
+
+      if (irandom(100) < 51) {
+         obj_player.gold += gold;
+         addToLog(argument2 + " dropped " + string(gold) + " gold");
+      }
       instance_destroy();
-      ds_list_add(combatStrings, "You defeated " + argument2);
+      addToLog("You defeated " + argument2 + " and gained 45 EXP.");
+      
       return false;
 }
 else
