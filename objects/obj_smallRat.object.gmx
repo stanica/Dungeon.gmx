@@ -35,6 +35,8 @@ armor = 0;
 attackDamage = 4;
 enemyType = 1;
 enemyString = "Small Rat"
+path = path_add();
+
 </string>
           </argument>
         </arguments>
@@ -58,14 +60,13 @@ enemyString = "Small Rat"
           <argument>
             <kind>1</kind>
             <string>var obj = instance_nearest(x, y, obj_player);
-var distance = 192;
+var distance = 256;
 
 if (distance_to_object(obj_player) &lt; distance &amp;&amp; !collision_line(x, y, obj.x, obj.y, obj_wall, 0, 1)) {
-    path = path_add();
-    mp_potential_path(path, obj_player.x, obj_player.y, 3, 4, 0);
-    path_start(path, 3, 0, 0);
+    mp_potential_step(obj_player.x, obj_player.y, 3, 0);
 }
-//distance_to_object(obj) &lt; distance &amp;&amp; !collision_line(x+16, y+16, obj.x, obj.y, obj_wall, 1, 1)
+
+
 </string>
           </argument>
         </arguments>

@@ -25,6 +25,8 @@
     <script>scripts\meleeDamage.gml</script>
     <script>scripts\checkHealth.gml</script>
     <script>scripts\addToLog.gml</script>
+    <script>scripts\start_chase.gml</script>
+    <script>scripts\chase.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>

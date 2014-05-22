@@ -1,5 +1,5 @@
 if (argument0 == 1) {
-   var numEnemies = irandom(maxEnemyNumber - 8) + 8;
+   var numEnemies = irandom(maxEnemyNumber - 8) + 18;
    var currentEnemy = 0;
    var generatedEnemies = 0;
    var exists = false;
