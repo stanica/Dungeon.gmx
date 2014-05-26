@@ -30,9 +30,24 @@ globalvar combatStrings;
 globalvar logIndex;
 logIndex = 0;
 globalvar logSize;
+padding = 20;
 logSize = 0;
 combatStrings = ds_list_create();
+draw_set_font(fnt_8bit);
 
+//UI for armor
+//Helm
+//instance_create(view_xview[1]+80, view_yview[1]+250, obj_indent);
+instance_create(view_xview[1]+95, view_yview[1]+250, obj_helm);
+//Chest
+//instance_create(view_xview[1]+80, view_yview[1]+282, obj_indent);
+instance_create(view_xview[1]+95, view_yview[1]+314, obj_chest);
+//Weapon
+//instance_create(view_xview[1]+48, view_yview[1]+282, obj_indent);
+instance_create(view_xview[1]+31, view_yview[1]+314, obj_wep);
+//Shield
+//instance_create(view_xview[1]+112, view_yview[1]+282, obj_indent);
+instance_create(view_xview[1]+159, view_yview[1]+314, obj_shield);
 </string>
           </argument>
         </arguments>
@@ -55,8 +70,7 @@ combatStrings = ds_list_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var padding = 20;
-draw_set_color(c_blue);
+            <string>draw_set_color(c_blue);
 
 //Right panel
 //draw_rectangle(896,0,1088,512,false);
@@ -93,8 +107,7 @@ draw_text(view_xport[1]+63, view_yport[1]+padding*8.5, obj_player.attackDamage);
 draw_text(view_xport[1]+padding, view_yport[1]+padding*9.5, "GOLD: ");
 draw_text(view_xport[1]+73, view_yport[1]+padding*9.5, obj_player.gold);
 
-logSize = ds_list_size(combatStrings);
-
+//Log display
 if (logSize &gt; 0) {
    draw_set_color(c_black);
    for (x = logIndex; x &lt; logIndex + 5; x++) {
@@ -102,8 +115,10 @@ if (logSize &gt; 0) {
    }
 }
 if (logSize &gt; 5 &amp;&amp; !instance_exists(obj_up_button) &amp;&amp; !instance_exists(obj_down_button)) {
-   instance_create(view_xview[2]+400,view_yview[2]+10, obj_up_button);
-   instance_create(view_xview[2]+400,view_yview[2]+85, obj_down_button);
+   if(!instance_exists(obj_up_button))
+       instance_create(view_xview[2]+400,view_yview[2]+10, obj_up_button);
+   if(!instance_exists(obj_down_button))
+       instance_create(view_xview[2]+400,view_yview[2]+85, obj_down_button);
 }
 </string>
           </argument>

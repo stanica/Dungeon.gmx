@@ -66,7 +66,17 @@ if (distance_to_object(obj_player) &lt; distance &amp;&amp; !collision_line(x, y
     mp_potential_step(obj_player.x, obj_player.y, 3, 0);
 }
 
+if (eHealth &lt; 0) {
+   obj_player.experience += 45;
+   gold = irandom(4)+1;
 
+    if (irandom(100) &lt; 51) {
+       obj_player.gold += gold;
+       addToLog(enemyString + " dropped " + string(gold) + " gold");
+    }
+    instance_destroy();
+    addToLog("You defeated " + enemyString + " and gained 45 EXP.");
+}
 </string>
           </argument>
         </arguments>

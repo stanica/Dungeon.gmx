@@ -89,6 +89,11 @@ view_yview[0] = y - (view_hview[0] / 2);
 
 var x1 = floor(x/32);
 var y1 = floor(y/32);
+
+if (health &lt; 0) {
+    show_message("Game over. You were killed.");
+    game_restart();
+}
 </string>
           </argument>
         </arguments>
@@ -111,7 +116,7 @@ var y1 = floor(y/32);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>doCombat(other.id, other.enemyType);
+            <string>doCombat(other.id);
 </string>
           </argument>
         </arguments>
