@@ -33,6 +33,11 @@ globalvar logSize;
 padding = 20;
 logSize = 0;
 combatStrings = ds_list_create();
+addToLog("Welcome to the dungeon.");
+addToLog("Kill enemies, find loot and try not to die.");
+addToLog("Tap the potion to drink, and the armor");
+addToLog("icons to see your inventory.");
+addToLog("Good luck, Hero!");
 draw_set_font(fnt_8bit);
 
 //UI for armor
@@ -48,6 +53,13 @@ instance_create(view_xview[1]+31, view_yview[1]+314, obj_wep);
 //Shield
 //instance_create(view_xview[1]+112, view_yview[1]+282, obj_indent);
 instance_create(view_xview[1]+159, view_yview[1]+314, obj_shield);
+
+instance_create(view_xview[1]+36, view_yview[1]+442, obj_healthPot);
+
+//Log navigation arrows
+instance_create(view_xview[2]+400,view_yview[2]+20, obj_up_button);
+instance_create(view_xview[2]+400,view_yview[2]+75, obj_down_button);
+
 </string>
           </argument>
         </arguments>
@@ -79,9 +91,9 @@ instance_create(view_xview[1]+159, view_yview[1]+314, obj_shield);
 
 draw_set_color(c_black);
 draw_text(view_xport[1]+padding, view_yport[1]+padding, "Health: ");
-if (health / obj_player.maxHealth &gt; 0.8)
+if (health / maxHealth &gt; 0.8)
     draw_set_color(c_green);
-else if (health / obj_player.maxHealth &gt; 0.5)
+else if (health / maxHealth &gt; 0.5)
     draw_set_color(c_orange);
 else
     draw_set_color(c_red);
@@ -107,6 +119,8 @@ draw_text(view_xport[1]+63, view_yport[1]+padding*8.5, obj_player.attackDamage);
 draw_text(view_xport[1]+padding, view_yport[1]+padding*9.5, "GOLD: ");
 draw_text(view_xport[1]+73, view_yport[1]+padding*9.5, obj_player.gold);
 
+draw_text(view_xport[1]+33, view_yport[1]+440, ds_map_find_value(inventory, "healthPot"));
+
 //Log display
 if (logSize &gt; 0) {
    draw_set_color(c_black);
@@ -114,12 +128,7 @@ if (logSize &gt; 0) {
        draw_text(5, 515+(x-logIndex)*18, ds_list_find_value(combatStrings, x));
    }
 }
-if (logSize &gt; 5 &amp;&amp; !instance_exists(obj_up_button) &amp;&amp; !instance_exists(obj_down_button)) {
-   if(!instance_exists(obj_up_button))
-       instance_create(view_xview[2]+400,view_yview[2]+10, obj_up_button);
-   if(!instance_exists(obj_down_button))
-       instance_create(view_xview[2]+400,view_yview[2]+85, obj_down_button);
-}
+
 </string>
           </argument>
         </arguments>

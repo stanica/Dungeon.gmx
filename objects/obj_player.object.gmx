@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>maxHealth = irandom(8) + 40;
+            <string>globalvar maxHealth; 
+maxHealth = irandom(8) + 40;
 health = maxHealth;
 strength = irandom(3) + 8;
 intelligence = irandom(3) + 8;
@@ -39,6 +40,11 @@ experience = 0;
 facing = 1
 image_index = 0;
 image_speed = 0;
+
+//Player inventory
+globalvar inventory;
+inventory = ds_map_create();
+ds_map_add(inventory,"healthPot","2");
 </string>
           </argument>
         </arguments>
@@ -62,7 +68,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>var playerSpeed = 32;
-
+    
 if (keyboard_check(ord("D")) &amp;&amp; !place_meeting(x+playerSpeed, y, obj_wall) ) {
     x += playerSpeed;
     image_index = 0;
@@ -93,6 +99,33 @@ var y1 = floor(y/32);
 if (health &lt; 0) {
     show_message("Game over. You were killed.");
     game_restart();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_gold">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with(other.id){
+    obj_player.gold += gold;
+    addToLog("You picked up " + string(gold) + " gold.");
+    instance_destroy();
 }
 </string>
           </argument>

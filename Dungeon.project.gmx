@@ -12,9 +12,12 @@
     <sprite>sprites\spr_scrollButton</sprite>
     <sprite>sprites\spr_smallHelm</sprite>
     <sprite>sprites\spr_armorUI</sprite>
-    <sprite>sprites\spr_indent</sprite>
+    <sprite>sprites\spr_chest</sprite>
+    <sprite>sprites\spr_gold</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bkg</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\init.gml</script>
@@ -51,6 +54,8 @@
     <object>objects\obj_chest</object>
     <object>objects\obj_wep</object>
     <object>objects\obj_shield</object>
+    <object>objects\obj_healthPot</object>
+    <object>objects\obj_gold</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
