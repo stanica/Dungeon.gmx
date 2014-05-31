@@ -14,6 +14,7 @@
     <sprite>sprites\spr_armorUI</sprite>
     <sprite>sprites\spr_chest</sprite>
     <sprite>sprites\spr_gold</sprite>
+    <sprite>sprites\spr_healthPot</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bkg</background>
@@ -30,6 +31,8 @@
     <script>scripts\doCombat.gml</script>
     <script>scripts\meleeDamage.gml</script>
     <script>scripts\addToLog.gml</script>
+    <script>scripts\spawn.gml</script>
+    <script>scripts\generateChests.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_8bit</font>
@@ -54,8 +57,10 @@
     <object>objects\obj_chest</object>
     <object>objects\obj_wep</object>
     <object>objects\obj_shield</object>
-    <object>objects\obj_healthPot</object>
+    <object>objects\obj_healthPotUI</object>
     <object>objects\obj_gold</object>
+    <object>objects\obj_itemChest</object>
+    <object>objects\obj_healthPot</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

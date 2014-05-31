@@ -1,4 +1,4 @@
-var totalRoomNumber = 20;
+var totalRoomNumber = 22;
 
 var minRoomSize = 7;
 var maxRoomSize = 9;
@@ -107,5 +107,5 @@ while(ds_list_size(rooms) < totalRoomNumber) {
     roomW = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
     roomH = minRoomSize + irandom(maxRoomSize - minRoomSize + 1);
 }
-
+generateChests();
 addEnemies(1);

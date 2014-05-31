@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>globalvar maxHealth; 
-maxHealth = irandom(8) + 40;
+maxHealth = irandom(8) + 400;
 health = maxHealth;
 strength = irandom(3) + 8;
 intelligence = irandom(3) + 8;
@@ -105,6 +105,42 @@ if (health &lt; 0) {
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_healthPot">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var potCount = real(ds_map_find_value(inventory,"healthPot"));
+if (potCount == 0) {
+   var potUI = instance_find(obj_healthPotUI,0);
+   with (potUI) {
+       image_index = 4;
+   }
+}    
+potCount += 1;
+ds_map_replace(inventory,"healthPot",potCount);
+
+with (other.id) {
+    instance_destroy();
+    addToLog("You picked up a health potion.");
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_gold">
       <action>
         <libid>1</libid>
@@ -124,8 +160,8 @@ if (health &lt; 0) {
             <kind>1</kind>
             <string>with(other.id){
     obj_player.gold += gold;
-    addToLog("You picked up " + string(gold) + " gold.");
     instance_destroy();
+    addToLog("You picked up " + string(gold) + " gold.");
 }
 </string>
           </argument>

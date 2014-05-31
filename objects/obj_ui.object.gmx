@@ -54,7 +54,7 @@ instance_create(view_xview[1]+31, view_yview[1]+314, obj_wep);
 //instance_create(view_xview[1]+112, view_yview[1]+282, obj_indent);
 instance_create(view_xview[1]+159, view_yview[1]+314, obj_shield);
 
-instance_create(view_xview[1]+36, view_yview[1]+442, obj_healthPot);
+instance_create(view_xview[1]+36, view_yview[1]+442, obj_healthPotUI);
 
 //Log navigation arrows
 instance_create(view_xview[2]+400,view_yview[2]+20, obj_up_button);
