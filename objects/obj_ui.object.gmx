@@ -43,16 +43,16 @@ draw_set_font(fnt_8bit);
 //UI for armor
 //Helm
 //instance_create(view_xview[1]+80, view_yview[1]+250, obj_indent);
-instance_create(view_xview[1]+95, view_yview[1]+250, obj_helm);
+instance_create(view_xview[1]+95, view_yview[1]+250, obj_helmUI);
 //Chest
 //instance_create(view_xview[1]+80, view_yview[1]+282, obj_indent);
-instance_create(view_xview[1]+95, view_yview[1]+314, obj_chest);
+instance_create(view_xview[1]+95, view_yview[1]+314, obj_chestUI);
 //Weapon
 //instance_create(view_xview[1]+48, view_yview[1]+282, obj_indent);
-instance_create(view_xview[1]+31, view_yview[1]+314, obj_wep);
+instance_create(view_xview[1]+31, view_yview[1]+314, obj_wepUI);
 //Shield
 //instance_create(view_xview[1]+112, view_yview[1]+282, obj_indent);
-instance_create(view_xview[1]+159, view_yview[1]+314, obj_shield);
+instance_create(view_xview[1]+159, view_yview[1]+314, obj_shieldUI);
 
 instance_create(view_xview[1]+36, view_yview[1]+442, obj_healthPotUI);
 
@@ -122,12 +122,11 @@ draw_text(view_xport[1]+73, view_yport[1]+padding*9.5, obj_player.gold);
 draw_text(view_xport[1]+33, view_yport[1]+440, ds_map_find_value(inventory, "healthPot"));
 
 //Log display
-if (logSize &gt; 0) {
-   draw_set_color(c_black);
-   for (x = logIndex; x &lt; logIndex + 5; x++) {
-       draw_text(5, 515+(x-logIndex)*18, ds_list_find_value(combatStrings, x));
-   }
+draw_set_color(c_black);
+for (x = logIndex; x &lt; logIndex + 5; x++) {
+    draw_text(5, 515+(x-logIndex)*18, ds_list_find_value(combatStrings, x));
 }
+
 
 </string>
           </argument>

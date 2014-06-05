@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="6" enumb="4">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,30 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Initial setup
-randomize();
-globalvar spriteSize;
-spriteSize = 32;
-
-globalvar totalRooms;
-totalRooms = 0;
-
-//Max number of any given enemy
-globalvar maxEnemyNumber;
-maxEnemyNumber = 110;
-
-//0 is open, 1 is closed
-globalvar inventoryOpen;
-inventoryOpen = 0;
-
-var height = ceil((room_height) / spriteSize);
-var width = ceil((room_width) / spriteSize);
-
-init(width, height);
-
-map1(width, height);
-
-draw(width, height);
+            <string>if (inventoryOpen == 0){
+   instance_create(0,0,obj_inventory);
+   inventoryOpen = 1;  
+}
+else {
+     with(obj_inventory){
+        instance_destroy();
+        inventoryOpen = 0;
+     }
+}
 </string>
           </argument>
         </arguments>

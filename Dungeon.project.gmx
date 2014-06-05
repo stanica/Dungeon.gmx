@@ -53,14 +53,16 @@
     <object>objects\obj_down_button</object>
     <object>objects\obj_indent</object>
     <object>objects\obj_smallHelm</object>
-    <object>objects\obj_helm</object>
-    <object>objects\obj_chest</object>
-    <object>objects\obj_wep</object>
-    <object>objects\obj_shield</object>
+    <object>objects\obj_helmUI</object>
+    <object>objects\obj_chestUI</object>
+    <object>objects\obj_wepUI</object>
+    <object>objects\obj_shieldUI</object>
     <object>objects\obj_healthPotUI</object>
     <object>objects\obj_gold</object>
     <object>objects\obj_itemChest</object>
     <object>objects\obj_healthPot</object>
+    <object>objects\obj_drawInventory</object>
+    <object>objects\obj_inventory</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
