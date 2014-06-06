@@ -33,7 +33,7 @@ maxHealth = irandom(8) + 400;
 health = maxHealth;
 strength = irandom(3) + 8;
 intelligence = irandom(3) + 8;
-dexterity = irandom(3) + 8;
+dexterity = irandom(3) + 300;
 defense = irandom(3) + 8
 armor = 0;
 gold = 0;
@@ -48,6 +48,8 @@ image_speed = 0;
 globalvar inventory;
 inventory = ds_map_create();
 ds_map_add(inventory,"healthPot","2");
+
+name = "Hero";
 </string>
           </argument>
         </arguments>

@@ -34,7 +34,7 @@ defense = irandom(2) + 5;
 armor = 0;
 attackDamage = 4;
 enemyType = 1;
-enemyString = "Small Rat"
+name = "Small Rat"
 //path = path_add();
 canFight = true;
 
@@ -102,7 +102,7 @@ if (eHealth &lt; 0) {
         spawn(id, obj_healthPot);
         
     instance_destroy();
-    addToLog("You defeated " + enemyString + " and gained 45 EXP.");
+    addToLog("You defeated " + name + " and gained 45 EXP.");
 }
 </string>
           </argument>
